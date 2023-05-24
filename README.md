@@ -8,11 +8,17 @@ The idea is to have a docker image with:
 - jupyterlab
 
 # Docker build
+
 ```
 docker build -t pytorch-jupyterlab:lastest .
 ```
 
 # Run
+
+```
+docker run --name pytorch-jupyterlab --ipc=host --gpus all -p 8888:8888 -e JUPYTER_TOKEN={DEFINE_YOUR_PASSWORD} -v {YOUR_CURRENT_PROJECT_FOLDER}:/tmp -w /tmp -it pytorch-jupyter
+```
+#
 ```
 docker start pytorch-jupyterlab
 ```
