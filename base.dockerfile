@@ -19,6 +19,8 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 # build with some basic python packages
 RUN pip install jupyterlab
 
+WORKDIR /app/
+
 # start jupyter lab
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--no-browser"]
 EXPOSE 8888

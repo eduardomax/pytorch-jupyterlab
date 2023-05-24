@@ -1,5 +1,5 @@
 # Base image must at least have pytorch and CUDA installed.
-ARG BASE_IMAGE=pytorch/pytorch:2.0.0-cuda11.7-cudnn8-devel
+ARG BASE_IMAGE=pytorch/pytorch:1.12.1-cuda11.3-cudnn8-devel
 FROM $BASE_IMAGE
 ARG BASE_IMAGE
 
@@ -22,7 +22,8 @@ RUN pip uninstall -y apex || :
 # and therefore force cloning of the latest version of Apex
 RUN SHA=ToUcHMe git clone https://github.com/NVIDIA/apex.git
 WORKDIR /tmp/unique_for_apex/apex
-RUN pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
+RUN rm -rf build
+RUN pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 
 # Set bash as the default shell
 ENV SHELL=/bin/bash
